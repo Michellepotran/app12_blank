@@ -9,8 +9,8 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-import ToDoList from './ToDoList'; 
-import ToDoForm from './ToDoForm'; 
+import ToDoList from './ToDoList.jsx'; 
+import ToDoForm from './ToDoForm.jsx'; 
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -20,17 +20,18 @@ function App() {
   ]);
 
   // Function to add a new task
-  const addTask = (task) => {
-    if (task.length > 0) {
-      setTasks([...tasks, task]);
+  const addTask = (taskText) => {
+    if (taskText.trim()) { // Ensure the task isn't empty or just whitespace
+      setTasks([...tasks, taskText]); // Add the new task to the tasks array
     }
   };
 
   return (
-    <SafeAreaView>
-      <ScrollView>
+    <SafeAreaView style={{flex:2}}>
+      <ScrollView style={{flex:2}}>
         <ToDoList tasks={tasks} />
       </ScrollView>
+      <ToDoForm addTask={addTask} />
     </SafeAreaView>
   );
 }
