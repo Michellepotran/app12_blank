@@ -1,39 +1,22 @@
-/**
- * My To Do List App
- *
- * @format
- */
 
-import React, { useState } from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-} from 'react-native';
-import ToDoList from './ToDoList.jsx'; 
-import ToDoForm from './ToDoForm.jsx'; 
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationIndependentTree } from '@react-navigation/native';
+import HomeScreen from './HomeScreen';  // Adjust this path if needed
+import AboutScreen from './AboutScreen';
 
-function App() {
-  const [tasks, setTasks] = useState([
-    'Do laundry',
-    'Go to gym',
-    'Walk dog'
-  ]);
+const Stack = createStackNavigator();
 
-  // Function to add a new task
-  const addTask = (taskText) => {
-    if (taskText.trim()) { // Ensure the task isn't empty or just whitespace
-      setTasks([...tasks, taskText]); // Add the new task to the tasks array
-    }
-  };
-
+export default function App() {
   return (
-    <SafeAreaView style={{flex:2}}>
-      <ScrollView style={{flex:2}}>
-        <ToDoList tasks={tasks} />
-      </ScrollView>
-      <ToDoForm addTask={addTask} />
-    </SafeAreaView>
+    <NavigationIndependentTree>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="About" component={AboutScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+    </NavigationIndependentTree>
   );
 }
-
-export default App;
